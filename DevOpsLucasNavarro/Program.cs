@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DevOpsLucasNavarro.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DevOpsLucasNavarroContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevOpsLucasNavarroContext") ?? throw new InvalidOperationException("Connection string 'DevOpsLucasNavarroContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
